@@ -1,0 +1,601 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:500i');
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+.App.fix-content {
+  position: fixed;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+body {
+  background-color: rgba(214, 208, 210, 0.1);
+  font-family: 'Open Sans', sans-serif;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 24px 102px 48px;
+}
+
+.main-content {
+  display: grid;
+  grid-column: span 12;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 0;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.list-item {
+  grid-column: span 2;
+}
+
+.page-description {
+  grid-column: span 12;
+  padding: 0 0 6px 6px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  color: #292929;
+  margin: 0;
+}
+
+header.container {
+  max-height: 74px;
+  padding: 22px 102px;
+  background-color: #292929;
+}
+
+header .logo {
+  display: flex;
+  grid-column: span 6;
+  text-align: left;
+  align-self: center;
+}
+
+header .logo a {
+  font-size: 24px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  vertical-align: bottom;
+}
+
+header .search {
+  grid-column: span 5;
+  position: relative;
+  display: flex;
+}
+
+header .search .icon,
+header .search-button {
+  position: absolute;
+  top: 10px;
+  left: 16px;
+}
+header .show-search {
+  grid-column: span 5;
+}
+header .show-search button {
+  padding: 10px;
+  float: right;
+}
+header .favorite {
+  grid-column: span 1;
+  position: relative;
+  display: inline-block;
+}
+header .favorite button {
+  cursor: pointer;
+  padding: 10px;
+}
+header .favorite > div {
+  text-align: right;
+  float: right;
+}
+
+header .favorite .drop-down {
+  text-align: left;
+}
+
+header .search input {
+  width: calc(100% - 50px);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 9px 0 9px 50px;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px 0 rgba(159, 158, 158, 0.3);
+  background: #ffffff;
+  outline: none;
+  border: 0;
+  color: #20130b;
+}
+
+header .drop-down {
+  background: #ffffff;
+  position: absolute;
+  top: 35px;
+  width: 100%;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0 2px 24px 0 rgba(141, 141, 141, 0.24);
+  max-height: 60vh;
+  overflow-y: auto;
+  /* padding-right: 32px; */
+}
+
+header .drop-down ul {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+header .drop-down .option {
+  grid-column: span 12;
+  padding: 16px;
+  border-top: 1px solid #f0f0f0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+header .drop-down .option button {
+  grid-column: span 1;
+}
+
+header .drop-down a {
+  text-decoration: none;
+  color: #20130b;
+  display: inline-block;
+  max-height: 55px;
+  font-size: 16px;
+  font-weight: 600;
+  grid-column: span 10;
+}
+
+header .drop-down img {
+  display: inline-block;
+  max-height: 55px;
+  vertical-align: middle;
+  padding-right: 16px;
+  grid-column: span 1;
+}
+
+header .drop-down .option:hover {
+  background-color: #f0f0f0;
+}
+
+header .favorite .drop-down {
+  width: 400px;
+  right: 0;
+  padding: 0;
+}
+
+header .favorite h4 {
+  padding: 24px;
+}
+
+.movie-card {
+  margin: 8px 7px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.movie-card img {
+  display: block;
+  width: 100%;
+}
+
+.movie-card .details {
+  display: block;
+  position: absolute;
+  background: rgba(32, 19, 11, 0.72);
+  width: 100%;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: left;
+  box-sizing: border-box;
+  opacity: 0;
+  padding: 14px;
+  color: #ffffff;
+}
+
+.movie-card a {
+  color: #ffffff;
+}
+
+.movie-card:hover .details {
+  opacity: 1;
+}
+
+.movie-card .name {
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.movie-card .overview {
+  font-size: 14px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.movie-card .link-to-movie {
+  font-size: 14px;
+  font-weight: 600;
+  vertical-align: baseline;
+}
+
+.movie-card .links {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+}
+
+.movie-card .links button {
+  float: right;
+  cursor: pointer;
+}
+
+.page-buttons {
+  grid-column: span 12;
+  padding: 16px 6px;
+}
+
+.page-buttons a {
+  border: none;
+  font-size: 16px;
+  padding: 10px 14px;
+  min-width: 32px;
+  font-weight: 400;
+  color: #20130b;
+  cursor: pointer;
+}
+
+.page-buttons li:first-child {
+  margin-right: 20px;
+}
+
+.page-buttons li:last-child {
+  margin-left: 20px;
+}
+
+.page-buttons .link a {
+  background-color: #ffffff;
+  font-weight: 600;
+  border: 1px solid #d7d0d3;
+  text-decoration: none;
+}
+.page-buttons .link a:hover {
+  border: 1px solid #ec5a0f;
+}
+.page-buttons .first a,
+.page-buttons .last a {
+  background-color: #f1e1c7;
+  border: none !important;
+  border-radius: 4px;
+}
+
+.page-buttons .prev a,
+.page-buttons .next a {
+  border-radius: 4px 0 0 4px;
+  border: none !important;
+  background: #20130b;
+  position: relative;
+}
+.page-buttons .prev a::before,
+.page-buttons .next a::before {
+  content: '';
+  display: block;
+  position: absolute;
+  background: url('../images/arrow.svg') no-repeat;
+  background-size: contain;
+  height: 16px;
+  width: 8px;
+  left: 38%;
+  top: 28%;
+}
+.page-buttons .prev a::before {
+  transform: scaleX(-1);
+}
+
+.page-buttons .next a {
+  border-radius: 0 4px 4px 0;
+}
+
+.page-buttons li {
+  display: inline-block;
+}
+
+.page-buttons .active a {
+  background-color: #d6d0d2;
+}
+
+.movie-page {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 24px 100px;
+  color: #20130b;
+}
+
+.movie-page .back {
+  text-align: left;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #20130b;
+  text-decoration: none;
+  padding: 6px;
+  margin-bottom: 24px;
+}
+.movie-page .left-side {
+  grid-column: span 3;
+  padding-bottom: 32px;
+}
+
+.movie-page .right-side {
+  grid-column: span 9;
+  padding: 52px 0 0 30px;
+  font-size: 18px;
+}
+
+.movie-page .right-side li {
+  display: inline;
+  font-weight: 400;
+}
+
+.movie-page .poster {
+  padding: 6px;
+  box-shadow: 0 2px 4px 0 rgba(32, 19, 11, 0.1);
+  background-color: #ffffff;
+}
+
+.movie-page .poster img {
+  display: block;
+  width: 100%;
+}
+
+.movie-page .title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding-bottom: 12px;
+}
+
+.movie-page .tagline {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.movie-page ul {
+  padding-bottom: 8px;
+}
+
+.movie-page .default-text {
+  font-weight: 500;
+  padding-bottom: 8px;
+  display: block;
+}
+
+.movie-page .overview {
+  font-weight: 400;
+  line-height: 1.5555555555555556;
+  display: inline-block;
+}
+
+.movie-page .recomendation {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.movie-page .no-recommendation {
+  grid-column: span 12;
+  text-align: center;
+}
+.movie-page .favorite-icon {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.movie-page .favorite-button,
+.show-more-recommendations {
+  color: #ec5a0f;
+  padding: 0;
+  cursor: pointer;
+}
+
+.movie-page .right-side .favorite-button svg {
+  padding-right: 10px;
+}
+
+.show-more-recommendations {
+  grid-column: span 12;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  header.container,
+  .container,
+  .movie-page {
+    padding: 12px 36px 12px 36px;
+  }
+  .list-item {
+    grid-column: span 3;
+  }
+  .movie-page .left-side {
+    grid-column: span 4;
+  }
+  .movie-page .right-side {
+    grid-column: span 8;
+  }
+  .movie-card .name {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 850px) {
+  .list-item {
+    grid-column: span 6;
+  }
+  .movie-page .left-side {
+    grid-column: span 12;
+    padding-bottom: 0;
+  }
+  .movie-page .poster {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .movie-page .right-side {
+    grid-column: span 12;
+    padding: 24px 0;
+  }
+  header.container {
+    position: relative;
+  }
+  .container,
+  header.container,
+  .movie-page {
+    padding: 10px 20px;
+  }
+  header .search {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  header .search .close {
+    grid-column: span 1;
+    padding: 10px;
+  }
+  header .search .close div {
+    background: url('../images/close-icon.svg') no-repeat 100%;
+    width: 20px;
+    height: 20px;
+  }
+  header .search input {
+    width: 100%;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid #f1e1c7;
+    color: #f1e1c7;
+    padding: 9px 0;
+    grid-column: span 11;
+  }
+  header .search .icon,
+  header .search-button {
+    right: 0;
+    left: unset;
+  }
+  /* header .search-button {
+    grid-column: span 1;
+  } */
+  header .favorite {
+    position: unset;
+  }
+  header .drop-down {
+    width: unset;
+    left: -20px;
+    right: -20px;
+    max-height: calc(100vh - 35px);
+  }
+  header .favorite .drop-down {
+    width: unset;
+    left: 0;
+    right: 0;
+    top: 55px;
+    max-height: calc(100vh - 55px);
+  }
+  .list-item {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .movie-card {
+    margin: 6px;
+  }
+  .movie-card .details {
+    position: relative;
+    opacity: 1;
+    grid-column: span 9;
+    padding: 6px 10px;
+  }
+  .movie-card img {
+    grid-column: span 3;
+  }
+  .movie-card .name {
+    margin-bottom: 4px;
+  }
+  .movie-card .links {
+    bottom: 6px;
+    left: 10px;
+    right: 10px;
+  }
+  .page-buttons .pagination {
+    display: flex;
+    justify-content: center;
+  }
+  .page-buttons a {
+    font-size: 15px;
+    padding: 10px 6px;
+  }
+  .page-buttons .prev a,
+  .page-buttons .next a {
+    padding: 11px 11px;
+  }
+  .page-buttons li:first-child {
+    margin-right: 6px;
+  }
+  .page-buttons li:last-child {
+    margin-left: 6px;
+  }
+}

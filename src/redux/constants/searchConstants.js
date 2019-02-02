@@ -1,0 +1,5 @@
+export const SET_SEARCH = 'searchReducer/SET_SEARCH'
+export const GET_SEARCH_REQUEST = 'searchReducer/GET_SEARCH_REQUEST'
+export const GET_SEARCH_SUCCESS = 'searchReducer/GET_SEARCH_SUCCESS'
+export const GET_SEARCH_FAIL = 'searchReducer/GET_SEARCH_FAIL'
+export const SET_SEARCH_INITIAL = 'searchReducer/SET_SEARCH_INITIAL'
