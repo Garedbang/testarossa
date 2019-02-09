@@ -18,20 +18,23 @@ export default class AddToFavoriteButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {favoritesList,movie} = this.props
-    if (favoritesList !== prevProps.favoritesList || movie.id !== prevProps.movie.id) {
+    const { favoritesList, movie } = this.props;
+    if (
+      favoritesList !== prevProps.favoritesList ||
+      movie.id !== prevProps.movie.id
+    ) {
       this.isMovieInFavorite(movie.id);
     }
   }
 
-  isMovieInFavorite = (id) => {
+  isMovieInFavorite = id => {
     this.setState({
       defaultButtonActive: isMovieInFavorite(id, this.props.favoritesList)
     });
   };
 
-  handleFavoriteClick = (movie) => {
-    const {removeFromFavorites, addToFavorites, favoritesList} = this.props
+  handleFavoriteClick = movie => {
+    const { removeFromFavorites, addToFavorites, favoritesList } = this.props;
     if (isMovieInFavorite(movie.id, favoritesList)) {
       removeFromFavorites(movie.id);
       this.setState({ defaultButtonActive: false });
@@ -42,19 +45,16 @@ export default class AddToFavoriteButton extends React.Component {
   };
 
   render() {
-    const { movie } = this.props;
     const { defaultButtonActive, isMoviePage } = this.state;
     return (
       <button
-        type='button'
+        type="button"
         className="favorite-button"
-        onClick={() => this.handleFavoriteClick(movie)}
+        onClick={() => this.handleFavoriteClick(this.props.movie)}
       >
         <Icon color="#EC5A0F" fill={defaultButtonActive} />
         {isMoviePage &&
-          (defaultButtonActive
-            ? 'Remove from favorite page'
-            : 'Add to favorite page')}
+          (defaultButtonActive ? 'Remove from favorite' : 'Add to favorite')}
       </button>
     );
   }

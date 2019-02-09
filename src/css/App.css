@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:500i');
 
-ul {
+ul,
+body {
   padding: 0;
   margin: 0;
 }
@@ -367,6 +368,7 @@ header .favorite h4 {
   text-decoration: none;
   padding: 6px;
   margin-bottom: 24px;
+  grid-column: span 12;
 }
 .movie-page .left-side {
   grid-column: span 3;
@@ -455,6 +457,10 @@ header .favorite h4 {
   grid-column: span 12;
 }
 
+.default-button {
+  background-color: #f1e1c7;
+  border-radius: 4px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

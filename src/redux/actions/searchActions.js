@@ -7,7 +7,6 @@ import {
 } from '../constants/searchConstants';
 
 function setSearch(data) {
-
   return {
     type: SET_SEARCH,
     payload: data.results
@@ -15,11 +14,10 @@ function setSearch(data) {
 }
 
 export function setInitialSearch() {
-    return {type: SET_SEARCH_INITIAL} 
-} 
+  return { type: SET_SEARCH_INITIAL };
+}
 
 export default function getSearch(query, api) {
-    console.log(query)    
   return dispatch => {
     dispatch({
       type: GET_SEARCH_REQUEST

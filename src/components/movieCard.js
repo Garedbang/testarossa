@@ -25,7 +25,6 @@ export default class MovieCard extends React.Component {
 
   updateLineCounter = () => {
     const { lineCounter } = this.state;
-    // console.log('triggered', (60 / 100) * window.innerWidth);
     if (window.innerWidth < 400) {
       if (lineCounter !== 1) {
         this.setState({
@@ -77,16 +76,10 @@ export default class MovieCard extends React.Component {
     }
   };
 
-  showFullName = () => {
-    this.setState({
-      showFullName: true
-    });
-  };
-
-  hideFullName = () => {
-    this.setState({
-      showFullName: false
-    });
+  handleFullName = () => {
+    this.setState(prevState => ({
+      showFullName: !prevState.showFullName
+    }));
   };
 
   render() {
@@ -110,19 +103,17 @@ export default class MovieCard extends React.Component {
             text={movie.overview}
           />
         )}
-
         <img
           src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${
             movie.poster_path
           }?api_key=${api}`}
           alt={`${movie.title} poster`}
         />
-
         <div className="details">
           <NavLink
             className="name"
-            onMouseEnter={this.showFullName}
-            onMouseLeave={this.hideFullName}
+            onMouseEnter={this.handleFullName}
+            onMouseLeave={this.handleFullName}
             to={`/movie/${movie.id}`}
           >
             {showFullName ? (

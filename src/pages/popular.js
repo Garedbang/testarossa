@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
-import MovieCard from './movieCard';
-import Pagination from './pagination';
+import MovieCard from '../components/movieCard';
+import Pagination from '../components/pagination';
 
 export default class Popular extends React.Component {
   constructor(props) {
@@ -13,18 +13,20 @@ export default class Popular extends React.Component {
   }
 
   componentDidMount() {
-    this.handlePageChange(
-      Number(this.props.match.match.url.split('/')[2]) || 1
-    );
+    this.handlePageChange(Number(this.props.match.match.params.pathParam || 1));
   }
 
   componentDidUpdate(prevProps) {
-
     if (prevProps.isMobile !== this.props.isMobile) {
-      const count = this.state.pageCounter === 5 ? 3 : 5
-      this.setState({pageCounter: count})
+      this.handlePageCounter();
     }
   }
+
+  handlePageCounter = () => {
+    this.setState(prevState => ({
+      pageCounter: prevState.pageCounter === 5 ? 3 : 5
+    }));
+  };
 
   handlePageChange = pageNumber => {
     this.props.getPopular(pageNumber, this.props.api);
@@ -36,7 +38,26 @@ export default class Popular extends React.Component {
     return (
       <div className="container">
         {statePopular.isFetched ? (
-          <h3>Wait a second, content is loading!</h3>
+          <Fragment>
+            <h3>
+              {statePopular.error
+                ? statePopular.error
+                : 'Wait a second, content is loading!'}
+            </h3>
+            {statePopular.error && (
+              <button
+                className="default-button"
+                type="button"
+                onClick={() =>
+                  this.handlePageChange(
+                    this.props.match.match.params.pathParam || 1
+                  )
+                }
+              >
+                Try one more time
+              </button>
+            )}
+          </Fragment>
         ) : (
           <Fragment>
             <h2 className="page-description">Popular movies</h2>

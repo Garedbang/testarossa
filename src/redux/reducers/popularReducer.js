@@ -31,7 +31,7 @@ export default function(state = initialState, action) {
     case GET_POPULAR_FAIL:
       return {
         ...state,
-        isFetched: false,
+        isFetched: true,
         error: action.payload
       };
 

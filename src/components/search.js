@@ -20,7 +20,7 @@ export default class Search extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.isMobile !== this.props.isMobile) {
-      this.updateDropDown(this.props.isMobile)
+      this.updateDropDown(this.props.isMobile);
     }
   }
 
@@ -32,7 +32,7 @@ export default class Search extends React.Component {
     this.props.getSearch(this.state.query, this.props.api);
   };
 
-  handleChangeQuery = (e) => {
+  handleChangeQuery = e => {
     const value = e.target.value.trim();
     if (value.length > 0 && value[0] !== ' ') {
       this.setState({ query: value, DropDown: true }, () => {
@@ -46,7 +46,7 @@ export default class Search extends React.Component {
     }
   };
 
-  handleClick = (e) => {
+  handleClick = e => {
     if (this.node.contains(e.target)) {
       this.setState({
         DropDown: true
@@ -63,7 +63,7 @@ export default class Search extends React.Component {
     this.props.handleFixContent(false);
   };
 
-  keyPress = (e) => {
+  keyPress = e => {
     if (e.key === 'Enter') {
       this.handleChangeQuery(e);
     }
@@ -90,22 +90,25 @@ export default class Search extends React.Component {
     this.handleClickOutside();
   };
 
-  updateDropDown = (isMobile) => {
+  updateDropDown = isMobile => {
     const { showSearchLine } = this.state;
     if (isMobile) {
       if (showSearchLine) {
         this.hideSearchLine();
-      }    
-    }
-    else if (!isMobile) {
+      }
+    } else if (!isMobile) {
       this.showSearchLine();
     }
   };
 
   render() {
     const { query, showSearchLine, DropDown } = this.state;
-    const { className, api, isMobile } = this.props;
-    const { movies } = this.props.searchData;
+    const {
+      api,
+      isMobile,
+      className,
+      searchData: { movies } = {}
+    } = this.props;
     return (
       <div
         className={showSearchLine ? className : 'show-search'}
@@ -123,10 +126,9 @@ export default class Search extends React.Component {
               >
                 <div />
               </button>
-            ): (<Icon
-              className="icon"
-              fill='#D6D0D2'
-            />)}
+            ) : (
+              <Icon className="icon" fill="#D6D0D2" />
+            )}
             <input
               type="text"
               autoFocus={isMobile}
@@ -136,7 +138,11 @@ export default class Search extends React.Component {
               onKeyDown={this.keyPress}
             />
             {showSearchLine && isMobile && (
-              <button className='search-button' type="button" onClick={() => this.handleGetMovies()}>
+              <button
+                className="search-button"
+                type="button"
+                onClick={() => this.handleGetMovies()}
+              >
                 <Icon fill="#D6D0D2" />
               </button>
             )}

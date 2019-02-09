@@ -32,13 +32,12 @@ export default function(state = initialState, action) {
     case GET_MOVIE_FAIL || GET_RECOMMENDATION_FAIL:
       return {
         ...state,
-        isFetched: false,
+        isFetched: true,
         error: action.payload
       };
 
     case SET_MOVIE: {
       const addMovie = [...state.movies, action.payload.movie];
-
       return {
         ...state,
         displayedMovie: action.payload.movie,
