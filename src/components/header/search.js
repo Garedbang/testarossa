@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import OptionForList from './optionForList';
-import Icon from '../images/search-icon';
+import Icon from '../../images/search-icon';
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -159,7 +159,7 @@ export default class Search extends React.Component {
                         addToFavorites={this.props.addToFavorites}
                         api={api}
                         className="option"
-                        hideSearchLine={this.hideSearchLine}
+                        hideDropDown={this.hideSearchLine}
                       />
                     ))}
                 </ul>

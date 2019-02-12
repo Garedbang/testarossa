@@ -10,16 +10,15 @@ import { connect } from 'react-redux';
 
 import {
   addMovieToFavorite,
-  removeMovieFromFavorite,
-  toggleFavoriteList
+  removeMovieFromFavorite
 } from './redux/actions/favoritesActions';
 import getPopular from './redux/actions/popularActions';
 import getMovie from './redux/actions/movieActions';
 import getSearch, { setInitialSearch } from './redux/actions/searchActions';
 
-import Header from './components/header';
-import MoviePage from './pages/movie';
-import Popular from './pages/popular';
+import Header from './components/header/index';
+import MoviePage from './pages/movie/index';
+import Popular from './pages/popular/index';
 
 import './css/normalize.css';
 import './css/App.css';
@@ -32,17 +31,21 @@ class App extends Component {
 
     this.state = {
       isContentFixed: false,
-      isMobile: false
+      isMobile: false,
+      recLineCounter: 0
     };
   }
 
   componentDidMount() {
     this.handleIsMobile();
+    this.updaterecLineCounter();
     window.addEventListener('resize', this.handleIsMobile);
+    window.addEventListener('resize', this.updaterecLineCounter);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleIsMobile);
+    window.removeEventListener('resize', this.updaterecLineCounter);
   }
 
   handleIsMobile = () => {
@@ -50,6 +53,59 @@ class App extends Component {
       this.setState({ isMobile: false });
     } else if (window.innerWidth < 850 && this.state.pageCounter !== true) {
       this.setState({ isMobile: true });
+    }
+  };
+
+  updaterecLineCounter = () => {
+    const { recLineCounter } = this.state;
+    if (window.innerWidth < 400) {
+      if (recLineCounter !== 1) {
+        this.setState({
+          recLineCounter: 1
+        });
+      }
+    } else if (window.innerWidth < 454) {
+      if (recLineCounter !== 4) {
+        this.setState({
+          recLineCounter: 4
+        });
+      }
+    } else if (window.innerWidth < 545) {
+      if (recLineCounter !== 5) {
+        this.setState({
+          recLineCounter: 5
+        });
+      }
+    } else if (window.innerWidth < 850) {
+      if (recLineCounter !== 6) {
+        this.setState({
+          recLineCounter: 6
+        });
+      }
+    } else if (window.innerWidth < 1400) {
+      if (recLineCounter !== 5) {
+        this.setState({
+          recLineCounter: 5
+        });
+      }
+    } else if (window.innerWidth < 1600) {
+      if (recLineCounter !== 6) {
+        this.setState({
+          recLineCounter: 6
+        });
+      }
+    } else if (window.innerWidth < 1800) {
+      if (recLineCounter !== 9) {
+        this.setState({
+          recLineCounter: 9
+        });
+      }
+    } else if (window.innerWidth > 1800) {
+      if (recLineCounter !== 11) {
+        this.setState({
+          recLineCounter: 11
+        });
+      }
     }
   };
 
@@ -69,12 +125,10 @@ class App extends Component {
           <LastLocationProvider>
             <Fragment>
               <Header
-                favoritesList={favoritesList.list}
                 api={API_KEY}
+                favoritesList={favoritesList.list}
                 removeFromFavorites={this.props.removeMovieFromFavorite}
                 addToFavorites={this.props.addMovieToFavorite}
-                showFavoriteList={favoritesList.showFavoriteList}
-                toggleFavoriteList={toggleFavoriteList}
                 handleFixContent={this.handleFixContent}
                 getSearch={this.props.getSearch}
                 searchData={this.props.searchData}
@@ -93,8 +147,9 @@ class App extends Component {
                       addToFavorites={this.props.addMovieToFavorite}
                       removeFromFavorites={this.props.removeMovieFromFavorite}
                       getPopular={this.props.getPopular}
-                      statePopular={this.props.popular}
+                      popularData={this.props.popular}
                       isMobile={this.state.isMobile}
+                      recLineCounter={this.state.recLineCounter}
                     />
                   )}
                 />
@@ -109,7 +164,7 @@ class App extends Component {
                       removeFromFavorites={this.props.removeMovieFromFavorite}
                       getMovie={this.props.getMovie}
                       movie={this.props.movie}
-                      currentPopularPage={this.props.popular.currentPage}
+                      recLineCounter={this.state.recLineCounter}
                     />
                   )}
                 />
@@ -132,7 +187,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addMovieToFavorite: movie => dispatch(addMovieToFavorite(movie)),
   removeMovieFromFavorite: id => dispatch(removeMovieFromFavorite(id)),
-  toggleFavoriteList: () => dispatch(toggleFavoriteList()),
   getPopular: (page, api) => dispatch(getPopular(page, api)),
   getMovie: (id, api) => dispatch(getMovie(id, api)),
   getSearch: (query, api) => dispatch(getSearch(query, api)),

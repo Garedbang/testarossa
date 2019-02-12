@@ -1,84 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import TextTruncate from 'react-text-truncate';
 
+import Image from './image';
 import AddToFavoriteButton from './addToFavoritesButton';
+import Shortener from './shortener';
 
 export default class MovieCard extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      lineCounter: 1,
-      showFullName: false
+      showFullName: false,
+      showDetails: false
     };
   }
-
-  componentDidMount() {
-    this.updateLineCounter();
-    window.addEventListener('resize', this.updateLineCounter);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateLineCounter);
-  }
-
-  updateLineCounter = () => {
-    const { lineCounter } = this.state;
-    if (window.innerWidth < 400) {
-      if (lineCounter !== 1) {
-        this.setState({
-          lineCounter: 1
-        });
-      }
-    } else if (window.innerWidth < 454) {
-      if (lineCounter !== 4) {
-        this.setState({
-          lineCounter: 4
-        });
-      }
-    } else if (window.innerWidth < 545) {
-      if (lineCounter !== 5) {
-        this.setState({
-          lineCounter: 5
-        });
-      }
-    } else if (window.innerWidth < 850) {
-      if (lineCounter !== 6) {
-        this.setState({
-          lineCounter: 6
-        });
-      }
-    } else if (window.innerWidth < 1400) {
-      if (lineCounter !== 5) {
-        this.setState({
-          lineCounter: 5
-        });
-      }
-    } else if (window.innerWidth < 1600) {
-      if (lineCounter !== 6) {
-        this.setState({
-          lineCounter: 6
-        });
-      }
-    } else if (window.innerWidth < 1800) {
-      if (lineCounter !== 9) {
-        this.setState({
-          lineCounter: 9
-        });
-      }
-    } else if (window.innerWidth > 1800) {
-      if (lineCounter !== 11) {
-        this.setState({
-          lineCounter: 11
-        });
-      }
-    }
-  };
 
   handleFullName = () => {
     this.setState(prevState => ({
       showFullName: !prevState.showFullName
+    }));
+  };
+
+  handleDetails = () => {
+    this.setState(prevState => ({
+      showDetails: !prevState.showDetails
     }));
   };
 
@@ -89,58 +34,50 @@ export default class MovieCard extends React.Component {
       addToFavorites,
       removeFromFavorites,
       className,
-      api
+      api,
+      recLineCounter
     } = this.props;
-    const { lineCounter, showFullName } = this.state;
+    const { showFullName, showDetails } = this.state;
+
     return (
-      <li className={className}>
-        {window.innerWidth > 850 && (
-          <TextTruncate
-            style={{ display: 'none' }}
-            className="overview"
-            line={4}
-            truncateText="…"
-            text={movie.overview}
-          />
-        )}
-        <img
-          src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${
-            movie.poster_path
-          }?api_key=${api}`}
-          alt={`${movie.title} poster`}
-        />
-        <div className="details">
-          <NavLink
-            className="name"
-            onMouseEnter={this.handleFullName}
-            onMouseLeave={this.handleFullName}
-            to={`/movie/${movie.id}`}
-          >
-            {showFullName ? (
-              movie.title
-            ) : (
-              <TextTruncate line={2} truncateText="…" text={movie.title} />
-            )}
-          </NavLink>
-          <div className="overview">
-            <TextTruncate
-              line={lineCounter}
-              truncateText="…"
-              text={movie.overview}
-            />
-          </div>
-          <div className="links">
-            <NavLink className="link-to-movie" to={`/movie/${movie.id}`}>
-              Read more
+      <li
+        className={className}
+        onMouseEnter={this.handleDetails}
+        onMouseLeave={this.handleDetails}
+      >
+        <Image movie={movie} api={api} />
+        {showDetails && (
+          <div className="details">
+            <NavLink
+              className="name"
+              onMouseEnter={this.handleFullName}
+              onMouseLeave={this.handleFullName}
+              to={`/movie/${movie.id}`}
+            >
+              {showFullName ? (
+                movie.title
+              ) : (
+                <Shortener recLineCounter={2} text={movie.title} />
+              )}
             </NavLink>
-            <AddToFavoriteButton
-              movie={movie}
-              favoritesList={favoritesList}
-              removeFromFavorites={removeFromFavorites}
-              addToFavorites={addToFavorites}
+            <Shortener
+              text={movie.overview}
+              recLineCounter={recLineCounter}
+              className="overview"
             />
+            <div className="links">
+              <NavLink className="link-to-movie" to={`/movie/${movie.id}`}>
+                Read more
+              </NavLink>
+              <AddToFavoriteButton
+                movie={movie}
+                favoritesList={favoritesList}
+                removeFromFavorites={removeFromFavorites}
+                addToFavorites={addToFavorites}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </li>
     );
   }

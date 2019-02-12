@@ -1,12 +1,10 @@
 import {
   ADD_MOVIE_TO_FAVORITE,
-  REMOVE_MOVIE_FROM_FAVORITE,
-  TOGGLE_FAVOTIRE_LIST
+  REMOVE_MOVIE_FROM_FAVORITE
 } from '../constants/favoritesСonstants';
 
 const initialState = {
-  list: [],
-  showFavoriteList: false
+  list: []
 };
 
 const favoritesList = (state = initialState, action) => {
@@ -31,12 +29,6 @@ const favoritesList = (state = initialState, action) => {
     case REMOVE_MOVIE_FROM_FAVORITE: {
       return {
         list: state.list.filter(item => item.id !== action.id)
-      };
-    }
-    case TOGGLE_FAVOTIRE_LIST: {
-      return {
-        ...state,
-          showFavoriteList: !state.showFavoriteList
       };
     }
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import MovieCard from './movieCard';
+import MovieCard from '../../components/movieCard';
 
 export default class Recommendation extends React.Component {
   constructor(props) {
@@ -23,7 +23,8 @@ export default class Recommendation extends React.Component {
       favoritesList,
       addToFavorites,
       removeFromFavorites,
-      recommendationsInLine
+      recommendationsInLine,
+      recLineCounter
     } = this.props;
     return (
       <Fragment>
@@ -43,6 +44,7 @@ export default class Recommendation extends React.Component {
               favoritesList={favoritesList}
               addToFavorites={addToFavorites}
               removeFromFavorites={removeFromFavorites}
+              recLineCounter={recLineCounter}
             />
           ))}
           {toggleMoreRecommendations &&
@@ -57,6 +59,7 @@ export default class Recommendation extends React.Component {
                   favoritesList={favoritesList}
                   addToFavorites={addToFavorites}
                   removeFromFavorites={removeFromFavorites}
+                  recLineCounter={recLineCounter}
                 />
               ))}
         </ul>

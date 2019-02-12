@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Option from './option';
+import OptionForList from './optionForList';
 import Icon from '../../images/favorite-icon';
 
 export default class Favorites extends React.Component {
@@ -9,7 +9,7 @@ export default class Favorites extends React.Component {
     this.state = {
       DropDown: false
     };
-  } 
+  }
 
   componentWillMount() {
     document.addEventListener('mousedown', this.handleClick);
@@ -34,7 +34,6 @@ export default class Favorites extends React.Component {
       }),
       () => {
         if (this.state.DropDown) {
-          this.props.toggleFavoriteList();
           this.props.handleFixContent(true);
         } else {
           this.clickOutside();
@@ -71,21 +70,19 @@ export default class Favorites extends React.Component {
             {favoritesList.length > 0 ? (
               <ul>
                 {favoritesList.map(movie => (
-                  <Option
-                    movie={movie}
+                  <OptionForList
                     key={movie.id}
-                    api={api}
+                    movie={movie}
+                    favoritesList={this.props.favoritesList}
                     removeFromFavorites={this.props.removeFromFavorites}
-                    openMovieInPage={this.props.handleMovieIdCallback}
+                    api={api}
                     className="option"
-                    handleFixContent={this.props.handleFixContent}
+                    hideDropDown={this.clickOutside}
                   />
                 ))}
               </ul>
             ) : (
-              <h4>
-                Your favorite movies list empty, try to add something!
-              </h4>
+              <h4>Your favorite movies list empty, try to add something!</h4>
             )}
           </div>
         )}

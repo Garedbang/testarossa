@@ -1,7 +1,6 @@
 import {
   ADD_MOVIE_TO_FAVORITE,
-  REMOVE_MOVIE_FROM_FAVORITE,
-  TOGGLE_FAVOTIRE_LIST
+  REMOVE_MOVIE_FROM_FAVORITE
 } from '../constants/favoritesСonstants';
 
 export function addMovieToFavorite(movie) {
@@ -15,11 +14,5 @@ export function removeMovieFromFavorite(id) {
   return {
     type: REMOVE_MOVIE_FROM_FAVORITE,
     id
-  };
-}
-
-export function toggleFavoriteList() {
-  return {
-    type: TOGGLE_FAVOTIRE_LIST
   };
 }

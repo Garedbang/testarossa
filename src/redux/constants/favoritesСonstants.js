@@ -1,3 +1,2 @@
 export const ADD_MOVIE_TO_FAVORITE = 'favoritesList/ADD_MOVIE_TO_FAVORITE';
 export const REMOVE_MOVIE_FROM_FAVORITE = 'favoritesList/REMOVE_MOVIE_FROM_FAVORITE';
-export const TOGGLE_FAVOTIRE_LIST = 'favoritesList/TOGGLE_FAVOTIRE_LIST';

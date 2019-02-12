@@ -2,7 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate';
 
-import AddToFavoriteButton from './addToFavoritesButton';
+import Image from '../image';
+import AddToFavoriteButton from '../addToFavoritesButton';
 
 export default ({
   movie,
@@ -11,17 +12,12 @@ export default ({
   removeFromFavorites,
   className,
   api,
-  hideSearchLine
+  hideDropDown
 }) => (
   <li className={className}>
-    <img
-      src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${
-        movie.poster_path
-      }?api_key=${api}`}
-      alt={`${movie.original_title} poster`}
-    />
-    <NavLink to={`/movie/${movie.id}`} onClick={hideSearchLine}>
-      <TextTruncate line={3} truncateText="…" text={movie.original_title} />
+    <Image movie={movie} api={api} />
+    <NavLink to={`/movie/${movie.id}`} onClick={hideDropDown}>
+      <TextTruncate line={3} truncateText="…" text={movie.title} />
       {movie.release_date && <span>({movie.release_date.split('-')[0]})</span>}
     </NavLink>
     <AddToFavoriteButton

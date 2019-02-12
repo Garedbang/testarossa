@@ -230,17 +230,12 @@ header .favorite h4 {
   right: 0;
   text-align: left;
   box-sizing: border-box;
-  opacity: 0;
   padding: 14px;
   color: #ffffff;
 }
 
 .movie-card a {
   color: #ffffff;
-}
-
-.movie-card:hover .details {
-  opacity: 1;
 }
 
 .movie-card .name {
@@ -370,18 +365,18 @@ header .favorite h4 {
   margin-bottom: 24px;
   grid-column: span 12;
 }
-.movie-page .left-side {
+.movie-page .sidebar {
   grid-column: span 3;
   padding-bottom: 32px;
 }
 
-.movie-page .right-side {
+.movie-page .content {
   grid-column: span 9;
-  padding: 52px 0 0 30px;
+  padding: 0 0 0 30px;
   font-size: 18px;
 }
 
-.movie-page .right-side li {
+.movie-page .content li {
   display: inline;
   font-weight: 400;
 }
@@ -449,7 +444,7 @@ header .favorite h4 {
   cursor: pointer;
 }
 
-.movie-page .right-side .favorite-button svg {
+.movie-page .content .favorite-button svg {
   padding-right: 10px;
 }
 
@@ -479,10 +474,10 @@ header .favorite h4 {
   .list-item {
     grid-column: span 3;
   }
-  .movie-page .left-side {
+  .movie-page .sidebar {
     grid-column: span 4;
   }
-  .movie-page .right-side {
+  .movie-page .content {
     grid-column: span 8;
   }
   .movie-card .name {
@@ -493,7 +488,7 @@ header .favorite h4 {
   .list-item {
     grid-column: span 6;
   }
-  .movie-page .left-side {
+  .movie-page .sidebar {
     grid-column: span 12;
     padding-bottom: 0;
   }
@@ -501,7 +496,7 @@ header .favorite h4 {
     width: 80%;
     margin: 0 auto;
   }
-  .movie-page .right-side {
+  .movie-page .content {
     grid-column: span 12;
     padding: 24px 0;
   }
